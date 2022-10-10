@@ -1,6 +1,5 @@
 package com.gabriel.ezequiel.ionicbackend;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +26,22 @@ public class SpringBootIonicBackendApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		CategoriaDTO cat1 = new CategoriaDTO(null, "informatica");
-		CategoriaDTO cat2 = new CategoriaDTO(null, "casa");
-		CategoriaDTO cat3 = new CategoriaDTO(null, "computador");
+		CategoriaDTO cat1 = new CategoriaDTO(1, "Informática");
+		CategoriaDTO cat2 = new CategoriaDTO(2, "Escritório");
 		
-		ProdutoDTO p1 = new ProdutoDTO(null, "computador", 2000.00);
-		ProdutoDTO p2 = new ProdutoDTO(null, "mouse", 200.00);
-		ProdutoDTO p3 = new ProdutoDTO(null, "teclado", 80.00);
+		ProdutoDTO p1 = new ProdutoDTO(3, "Computador", 2000.00);
+		ProdutoDTO p2 = new ProdutoDTO(4, "Impressora", 800.00);
+		ProdutoDTO p3 = new ProdutoDTO(5, "Mouse", 80.00);
 		
-		cat1.getProduto().addAll(Arrays.asList(p1,p2,p3));
+		cat1.getProduto().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProduto().addAll(Arrays.asList(p2));
 		
 		p1.getCategoria().addAll(Arrays.asList(cat1));
 		p2.getCategoria().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategoria().addAll(Arrays.asList(cat1));
-		reporsitorio.saveAll(Arrays.asList(cat1,cat2,cat3));
-		reporsitorioProduto.saveAll(Arrays.asList(p1,p2,p3));
+
+		reporsitorio.saveAll(Arrays.asList(cat1, cat2));
+		reporsitorioProduto.saveAll(Arrays.asList(p1, p2, p3));
 	}
 
 }

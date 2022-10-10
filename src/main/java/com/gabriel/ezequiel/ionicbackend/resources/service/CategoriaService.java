@@ -7,16 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.gabriel.ezequiel.ionicbackend.resources.dto.CategoriaDTO;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.CategoriaRepository;
+import com.gabriel.ezequiel.ionicbackend.resources.service.exception.ObjectNotFoundException;
 
 @Service
-public class CaregoriaService {
+public class CategoriaService {
 	@Autowired
 	private CategoriaRepository reporsitorio;
 	
-	public Optional<CategoriaDTO> buscar(Integer id) {
+	public CategoriaDTO buscar(Integer id) {
 		Optional<CategoriaDTO> response = reporsitorio.findById(id);
-		
-		return response;
+		return response.orElseThrow(()-> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + CategoriaDTO.class.getName()));
 		
 	}
 

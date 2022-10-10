@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gabriel.ezequiel.ionicbackend.resources.dto.CategoriaDTO;
-import com.gabriel.ezequiel.ionicbackend.resources.service.CaregoriaService;
+import com.gabriel.ezequiel.ionicbackend.resources.service.CategoriaService;
 
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaController {
 	
 	@Autowired
-	private CaregoriaService service;
+	private CategoriaService service;
 	
 	@RequestMapping(value= "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Optional<CategoriaDTO> response = service.buscar(id);
-		
-		return ResponseEntity.ok().body(response);
-		
+			CategoriaDTO response = service.buscar(id);
+			return ResponseEntity.ok().body(response);
+
 	}
 
 }
