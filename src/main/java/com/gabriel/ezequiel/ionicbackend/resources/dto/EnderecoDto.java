@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class EnderecoDto implements Serializable{
 	private static final long serialVersionUID = 4636189416162941863L;
@@ -22,9 +25,11 @@ public class EnderecoDto implements Serializable{
 	private String bairro;
 	private String cep;
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name ="cliente_id")
 	private ClienteDto cliente;
 	@ManyToOne
+
 	@JoinColumn(name ="cidade_id")
 	private CidadeDto cidade;
 	

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class EstadoDto implements Serializable{
 	private static final long serialVersionUID = 6586972413656199250L;
@@ -21,6 +23,7 @@ public class EstadoDto implements Serializable{
 	private String nome;
 	
 	@OneToMany(mappedBy = "estado")
+	@JsonBackReference
 	public List<CidadeDto> cidades = new ArrayList<>();
 	public Integer getId() {
 		return id;
