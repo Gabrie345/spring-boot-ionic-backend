@@ -30,6 +30,7 @@ public class ClienteDto implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
 	private List<EnderecoDto> enderecos = new ArrayList<>();
+	private List<PedidoDto> pedidos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -103,6 +104,13 @@ public class ClienteDto implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+	public List<PedidoDto> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<PedidoDto> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -128,4 +136,6 @@ public class ClienteDto implements Serializable {
 			return false;
 		return true;
 	}
+
+
 }
