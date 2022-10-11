@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class EnderecoDto implements Serializable{
@@ -19,7 +21,11 @@ public class EnderecoDto implements Serializable{
 	private String complemento;
 	private String bairro;
 	private String cep;
+	@ManyToOne
+	@JoinColumn(name ="cliente_id")
 	private ClienteDto cliente;
+	@ManyToOne
+	@JoinColumn(name ="cidade_id")
 	private CidadeDto cidade;
 	
 	public Integer getId() {
