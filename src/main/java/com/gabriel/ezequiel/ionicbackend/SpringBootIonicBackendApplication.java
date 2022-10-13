@@ -1,5 +1,6 @@
 package com.gabriel.ezequiel.ionicbackend;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import com.gabriel.ezequiel.ionicbackend.resources.dto.CidadeDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.ClienteDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.EnderecoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.EstadoDto;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoBoletoDto;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoCartaoDto;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoDto;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.PedidoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.ProdutoDTO;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoCliente;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoEstadoPagamento;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.CategoriaRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.CidadeRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.ClienteRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.EnderecoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.EstadoRepository;
+import com.gabriel.ezequiel.ionicbackend.resources.repository.PagamentoRepository;
+import com.gabriel.ezequiel.ionicbackend.resources.repository.PedidoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.ProdutoRepository;
 
 @SpringBootApplication
@@ -41,6 +49,12 @@ public class SpringBootIonicBackendApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootIonicBackendApplication.class, args);
@@ -89,6 +103,20 @@ public class SpringBootIonicBackendApplication implements CommandLineRunner{
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		PedidoDto pedido1 = new PedidoDto(null, simpleDateFormat.parse("30/09/2017 10:32"),cli1,e1);
+		PedidoDto pedido2 = new PedidoDto(null, simpleDateFormat.parse("30/09/2017 10:32"),cli1,e2);
+		
+		PagamentoCartaoDto pagamento1 = new PagamentoCartaoDto(null,TipoEstadoPagamento.QUITADO, pedido1, 1);
+		pedido1.setPagamento(pagamento1);
+		
+		PagamentoBoletoDto pagamento2 = new PagamentoBoletoDto(null,TipoEstadoPagamento.QUITADO,pedido2,simpleDateFormat.parse("30/09/2019 00:00"),simpleDateFormat.parse("30/09/2022 00:00"));
+		pedido2.setPagamento(pagamento2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
+		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
+		pagamentoRepository.saveAll(Arrays.asList(pagamento1,pagamento2));
 	}
 
 }

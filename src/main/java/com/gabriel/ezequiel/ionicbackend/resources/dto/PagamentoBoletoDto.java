@@ -8,15 +8,18 @@ import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoEstadoPagamento
 
 @Entity
 public class PagamentoBoletoDto extends PagamentoDto {
-	private static final long serialVersionUID = 562944531042109895L;
-	
+	private static final long serialVersionUID = 1L;
 	
 	private Date dataVencimento;
 	private Date dataPagamento;
 	
-	public PagamentoBoletoDto(Integer id, TipoEstadoPagamento estadoPagamento, PedidoDto pedido) {
-		super(id, estadoPagamento, pedido);
-		// TODO Auto-generated constructor stub
+	public PagamentoBoletoDto() {
+	}
+
+	public PagamentoBoletoDto(Integer id, TipoEstadoPagamento estado, PedidoDto pedido, Date dataVencimento, Date dataPagamento) {
+		super(id, estado, pedido);
+		this.dataPagamento = dataPagamento;
+		this.dataVencimento = dataVencimento;
 	}
 
 	public Date getDataVencimento() {
@@ -33,6 +36,6 @@ public class PagamentoBoletoDto extends PagamentoDto {
 
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
-	}
+	}	
 	
 }

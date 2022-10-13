@@ -14,8 +14,8 @@ import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoEstadoPagamento
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class PagamentoDto implements Serializable{
-	private static final long serialVersionUID = -562944531042109895L;
+public abstract class PagamentoDto implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Integer id;

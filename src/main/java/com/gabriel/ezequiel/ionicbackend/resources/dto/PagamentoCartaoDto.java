@@ -6,27 +6,26 @@ import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoEstadoPagamento
 
 @Entity
 public class PagamentoCartaoDto  extends PagamentoDto{
-	private static final long serialVersionUID = 562944531042109895L;
+	private static final long serialVersionUID = 1L;
 	
-	private int numeroDeParcelas;
-
+private Integer numeroDeParcelas;
+	
 	public PagamentoCartaoDto() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public PagamentoCartaoDto(Integer id, TipoEstadoPagamento estadoPagamento, PedidoDto pedido) {
-		super(id, estadoPagamento, pedido);
-		// TODO Auto-generated constructor stub
+	public PagamentoCartaoDto(Integer id, TipoEstadoPagamento estado, PedidoDto pedido, Integer numeroDeParcelas) {
+		super(id, estado, pedido);
+		this.numeroDeParcelas = numeroDeParcelas;
 	}
 
-	public int getNumeroDeParcelas() {
+	public Integer getNumeroDeParcelas() {
 		return numeroDeParcelas;
 	}
 
-	public void setNumeroDeParcelas(int numeroDeParcelas) {
+	public void setNumeroDeParcelas(Integer numeroDeParcelas) {
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
+	
 	
 	
 }

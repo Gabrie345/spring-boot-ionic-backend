@@ -32,12 +32,11 @@ public class PedidoDto implements Serializable{
 	private EnderecoDto enderecoDeEntrega;
 	
 	
-	public PedidoDto(Integer id, Date dataDoPedido, PagamentoDto pagamento, ClienteDto cliente,
+	public PedidoDto(Integer id, Date dataDoPedido, ClienteDto cliente,
 			EnderecoDto enderecoDeEntrega) {
 		super();
 		this.id = id;
 		this.dataDoPedido = dataDoPedido;
-		this.pagamento = pagamento;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
