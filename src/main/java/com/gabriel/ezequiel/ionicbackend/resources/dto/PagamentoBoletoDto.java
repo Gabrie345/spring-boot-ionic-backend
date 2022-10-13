@@ -2,8 +2,11 @@ package com.gabriel.ezequiel.ionicbackend.resources.dto;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.gabriel.ezequiel.ionicbackend.resources.dto.enums.TipoEstadoPagamento;
 
+@Entity
 public class PagamentoBoletoDto extends PagamentoDto {
 	private static final long serialVersionUID = 562944531042109895L;
 	
@@ -11,12 +14,8 @@ public class PagamentoBoletoDto extends PagamentoDto {
 	private Date dataVencimento;
 	private Date dataPagamento;
 	
-	
-	public PagamentoBoletoDto(Integer id, TipoEstadoPagamento estadoPagamento, 
-			PagamentoDto pagamento,Date dataVencimento,Date dataPagamento) {
-		super(id, estadoPagamento, pagamento);
-		this.dataPagamento = dataPagamento;
-		this.dataVencimento = dataVencimento;
+	public PagamentoBoletoDto(Integer id, TipoEstadoPagamento estadoPagamento, PedidoDto pedido) {
+		super(id, estadoPagamento, pedido);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,8 +34,5 @@ public class PagamentoBoletoDto extends PagamentoDto {
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
-
 	
-	
-
 }
