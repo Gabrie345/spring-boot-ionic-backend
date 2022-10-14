@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -29,10 +30,12 @@ public class PedidoDto implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private ClienteDto cliente;
+	
 	@ManyToOne
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private EnderecoDto enderecoDeEntrega;
 	
+	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedidoDto> itemPedido = new HashSet<>();
 	
 	public PedidoDto(Integer id, Date dataDoPedido, ClienteDto cliente,
@@ -76,6 +79,12 @@ public class PedidoDto implements Serializable{
 	}
 	public void setEnderecoDeEntrega(EnderecoDto enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+	public Set<ItemPedidoDto> getItemPedido() {
+		return itemPedido;
+	}
+	public void setItemPedido(Set<ItemPedidoDto> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 	
 	

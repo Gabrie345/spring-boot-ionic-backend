@@ -13,6 +13,7 @@ import com.gabriel.ezequiel.ionicbackend.resources.dto.CidadeDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.ClienteDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.EnderecoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.EstadoDto;
+import com.gabriel.ezequiel.ionicbackend.resources.dto.ItemPedidoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoBoletoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoCartaoDto;
 import com.gabriel.ezequiel.ionicbackend.resources.dto.PagamentoDto;
@@ -25,6 +26,7 @@ import com.gabriel.ezequiel.ionicbackend.resources.repository.CidadeRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.ClienteRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.EnderecoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.EstadoRepository;
+import com.gabriel.ezequiel.ionicbackend.resources.repository.ItemPedidoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.PagamentoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.PedidoRepository;
 import com.gabriel.ezequiel.ionicbackend.resources.repository.ProdutoRepository;
@@ -55,6 +57,9 @@ public class SpringBootIonicBackendApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootIonicBackendApplication.class, args);
@@ -117,6 +122,20 @@ public class SpringBootIonicBackendApplication implements CommandLineRunner{
 		cli1.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
 		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
 		pagamentoRepository.saveAll(Arrays.asList(pagamento1,pagamento2));
+		
+		ItemPedidoDto itemPedido1 = new ItemPedidoDto(pedido1,p1,0.00,1,1000.00);
+		ItemPedidoDto itemPedido2 = new ItemPedidoDto(pedido1,p2,0.00,1,3000.00);
+		ItemPedidoDto itemPedido3 = new ItemPedidoDto(pedido2,p2,100.00,1,5000.00);
+		
+		pedido1.getItemPedido().addAll(Arrays.asList(itemPedido1, itemPedido2));
+		pedido2.getItemPedido().addAll(Arrays.asList(itemPedido3));
+		
+		p1.getItemPedido().addAll(Arrays.asList(itemPedido1));
+		p2.getItemPedido().addAll(Arrays.asList(itemPedido3));
+		p3.getItemPedido().addAll(Arrays.asList(itemPedido2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1,itemPedido2,itemPedido3));
+		
 	}
 
 }

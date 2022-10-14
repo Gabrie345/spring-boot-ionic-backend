@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -26,7 +27,9 @@ public class ProdutoDTO implements Serializable{
 	private String nome;
 	private Double preco;
 	
+	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedidoDto> itemPedido = new HashSet<>();
+	
 	
 	@JsonBackReference
 	@ManyToMany
@@ -35,7 +38,7 @@ public class ProdutoDTO implements Serializable{
 	inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
 	public List<CategoriaDTO> categoria = new ArrayList<>();
-
+	
 	public List<PedidoDto> getListaPedidos(){
 		List<PedidoDto> lista = new ArrayList<>();
 		for(ItemPedidoDto x : itemPedido) {

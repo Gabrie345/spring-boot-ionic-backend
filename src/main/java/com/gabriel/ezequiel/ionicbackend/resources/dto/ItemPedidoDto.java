@@ -3,11 +3,15 @@ package com.gabriel.ezequiel.ionicbackend.resources.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+@Entity
 public class ItemPedidoDto implements Serializable{
 	private static final long serialVersionUID = 3465340715234621771L;
 
+	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
 	private Double desconto;
 	private Integer quantidade;
 	private Double preco;
