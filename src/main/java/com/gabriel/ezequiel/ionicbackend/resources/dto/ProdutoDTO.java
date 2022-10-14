@@ -2,7 +2,9 @@ package com.gabriel.ezequiel.ionicbackend.resources.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,8 @@ public class ProdutoDTO implements Serializable{
 	private String nome;
 	private Double preco;
 	
+	private Set<ItemPedidoDto> itemPedido = new HashSet<>();
+	
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
@@ -32,6 +36,14 @@ public class ProdutoDTO implements Serializable{
 	)
 	public List<CategoriaDTO> categoria = new ArrayList<>();
 
+	public List<PedidoDto> getListaPedidos(){
+		List<PedidoDto> lista = new ArrayList<>();
+		for(ItemPedidoDto x : itemPedido) {
+			lista.add(x.getPedido());
+		}
+		return lista;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -72,5 +84,13 @@ public class ProdutoDTO implements Serializable{
 	}
 
 	public ProdutoDTO() {
+	}
+
+	public Set<ItemPedidoDto> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(Set<ItemPedidoDto> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 }

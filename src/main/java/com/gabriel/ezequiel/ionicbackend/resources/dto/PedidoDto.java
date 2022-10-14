@@ -2,6 +2,8 @@ package com.gabriel.ezequiel.ionicbackend.resources.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,6 +33,7 @@ public class PedidoDto implements Serializable{
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private EnderecoDto enderecoDeEntrega;
 	
+	private Set<ItemPedidoDto> itemPedido = new HashSet<>();
 	
 	public PedidoDto(Integer id, Date dataDoPedido, ClienteDto cliente,
 			EnderecoDto enderecoDeEntrega) {
